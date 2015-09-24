@@ -39,3 +39,15 @@ RSpec.describe Chunk do
   end
 
 end
+
+RSpec.describe Token do
+  # Um, I trust datamapper to work correctly
+end
+
+RSpec.describe Edge do
+  # Um, I trust datamapper to work correctly
+end
+
+RSpec.describe AverageEdge do
+  # Um, I trust datamapper to work correctly
+end

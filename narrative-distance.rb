@@ -1,3 +1,5 @@
+require_relative "model"
+
 class Chunk
 
   def initialize(text) 

@@ -21,6 +21,9 @@ RSpec.describe Chunk do
       it "assigns @text" do
         expect(chunk.instance_variable_get(:@text)).to_not be_nil
       end
+      it "assigns @observations, a Hash" do
+        expect(chunk.instance_variable_get(:@observations).class).to eq Hash
+      end
       it "assigns @text_array, an Array" do
         expect(chunk.instance_variable_get(:@text_array).class).to eq Array
       end
@@ -47,10 +50,17 @@ RSpec.describe Chunk do
   describe '#process' do
 
     context "when there are Tokens" do
-      it "relies on Tokens" do
+      before (:all) do
+        # This is really fixtury...
         FactoryGirl.create :token
         FactoryGirl.create :token1
+      end
+      it "relies on Tokens" do
         expect(Token.all.length).to be > 0
+      end
+      it "looks for instances of a token (@observations) in the text" do
+        chunk.process
+        expect(chunk.instance_variable_get(:@observations).length).to be > 0
       end
     end
 

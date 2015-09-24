@@ -1,5 +1,10 @@
 require_relative '../narrative-distance'
 require 'factory_girl'
+require 'dm-rspec'
+
+RSpec.configure do |config|
+    config.include(DataMapper::Matchers)
+end
 
 RSpec.describe Chunk do
 
@@ -60,15 +65,18 @@ RSpec.describe Chunk do
 end
 
 RSpec.describe Token do
-  # Um, I trust datamapper to work correctly
+  it { should have_property :string }
+  it { should validate_presence_of :string }
+  it { should have_many :edges }
+  it { should have_many :average_edges }
 end
 
 RSpec.describe Edge do
-  # Um, I trust datamapper to work correctly
+  it { should belong_to :token }
 end
 
 RSpec.describe AverageEdge do
-  # Um, I trust datamapper to work correctly
+  it { should belong_to :token }
 end
 
 FactoryGirl.define do

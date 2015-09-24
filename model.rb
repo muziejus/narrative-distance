@@ -1,4 +1,5 @@
 require 'data_mapper'
+require 'dm-validations'
 
 DataMapper.setup(:default, 'sqlite:///users/moacir/Projects/narrative-distance/db.db')
 
@@ -8,10 +9,10 @@ class Token
   property :id, Serial
   property :string, String
 
-  validates_presence_of :string
-
   has n, :edges
   has n, :average_edges
+
+  validates_presence_of :string
 end
 
 class Edge

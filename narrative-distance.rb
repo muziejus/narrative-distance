@@ -15,4 +15,8 @@ class Chunk
     @text_array
   end
 
+  def process
+    raise StandardError if Token.all.length == 0
+  end
+
 end

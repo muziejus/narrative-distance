@@ -1,4 +1,5 @@
 require_relative '../narrative-distance'
+require 'factory_girl'
 
 RSpec.describe Chunk do
 
@@ -38,6 +39,24 @@ RSpec.describe Chunk do
     end
   end
 
+  describe '#process' do
+
+    context "when there are Tokens" do
+      it "relies on Tokens" do
+        FactoryGirl.create :token
+        FactoryGirl.create :token1
+        expect(Token.all.length).to be > 0
+      end
+    end
+
+    context "when there are no Tokens" do
+      it "errors out" do
+        Token.destroy
+        expect { chunk.process }.to raise_error StandardError
+      end
+    end
+  end
+
 end
 
 RSpec.describe Token do
@@ -50,4 +69,14 @@ end
 
 RSpec.describe AverageEdge do
   # Um, I trust datamapper to work correctly
+end
+
+FactoryGirl.define do
+  factory :token do
+    string "Madrid"
+  end
+
+  factory :token1, class: Token do
+    string "Bozeman"
+  end
 end

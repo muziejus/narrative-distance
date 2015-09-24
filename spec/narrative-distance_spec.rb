@@ -67,7 +67,7 @@ RSpec.describe Chunk do
     context "when there are no Tokens" do
       it "errors out" do
         Token.destroy
-        expect { chunk.process }.to raise_error StandardError
+        expect { chunk.process }.to raise_error Chunk::Error::NoTokens
       end
     end
   end

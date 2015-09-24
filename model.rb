@@ -7,24 +7,31 @@ class Token
 
   property :id, Serial
   property :string, String
+
+  validates_presence_of :string
+
+  has n, :edges
+  has n, :average_edges
 end
 
 class Edge
   include DataMapper::Resource
 
   property :id, Serial
-  property :token_1, Integer
-  property :token_2, Integer
+  property :far_token, Integer
   property :distance, Integer
+
+  belongs_to :token
 end
 
 class AverageEdge
   include DataMapper::Resource
 
   property :id, Serial
-  property :token_1, Integer
-  property :token_2, Integer
+  property :far_token, Integer
   property :average_distance, Float
+
+  belongs_to :token
 end
 
 

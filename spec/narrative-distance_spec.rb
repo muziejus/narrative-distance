@@ -1,7 +1,4 @@
 require_relative '../narrative-distance'
-require 'factory_girl'
-require 'dm-rspec'
-
 
 RSpec.describe Chunk do
 
@@ -49,8 +46,8 @@ RSpec.describe Chunk do
     context "when there are Tokens" do
       before (:all) do
         # This is really fixtury...
-        FactoryGirl.create :token
-        FactoryGirl.create :token1
+        create :token
+        create :token1
       end
       it "relies on Tokens" do
         expect(Token.all.length).to be > 0
@@ -60,15 +57,22 @@ RSpec.describe Chunk do
         expect(chunk.instance_variable_get(:@observations).length).to be > 0
       end
     end
-
+      
     context "when there are no Tokens" do
-      it "errors out" do
-        Token.destroy
-        expect { chunk.process }.to raise_error Chunk::Error::NoTokens
-      end
+      it "errors out" # do
+        # Token.destroy
+        # expect { chunk.process }.to raise_error Chunk::Error::NoTokens
+      # end
     end
   end
 
+  describe '#calculate_averages' do
+    pending
+  end
+
+  describe '#dump_csv' do
+    pending
+  end
 end
 
 RSpec.describe Token do
@@ -77,11 +81,11 @@ RSpec.describe Token do
   it { should have_many :edges }
   it { should have_many :average_edges }
 end
-
+ 
 RSpec.describe Edge do
   it { should belong_to :token }
-end
-
+ end
+ 
 RSpec.describe AverageEdge do
   it { should belong_to :token }
 end
@@ -95,3 +99,4 @@ FactoryGirl.define do
     string "Bozeman"
   end
 end
+

@@ -31,6 +31,7 @@ class AverageEdge
   property :id, Serial
   property :far_token, Integer
   property :average_distance, Float
+  property :count, Integer
 
   belongs_to :token
 end
